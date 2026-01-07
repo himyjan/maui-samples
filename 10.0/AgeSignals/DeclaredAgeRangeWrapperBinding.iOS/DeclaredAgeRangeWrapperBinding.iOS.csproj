@@ -5,6 +5,9 @@
     <ImplicitUsings>true</ImplicitUsings>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
     <IsBindingProject>true</IsBindingProject>
+    
+    <!-- Default to iOS simulator to avoid code signing requirements in CI -->
+    <RuntimeIdentifier Condition="'$(RuntimeIdentifier)' == ''">iossimulator-x64</RuntimeIdentifier>
   </PropertyGroup>
 
   <ItemGroup>
