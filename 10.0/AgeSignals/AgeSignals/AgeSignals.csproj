@@ -14,6 +14,9 @@
 		<SingleProject>true</SingleProject>
 		<ImplicitUsings>enable</ImplicitUsings>
 		<Nullable>enable</Nullable>
+		
+		<!-- Default iOS builds to simulator to avoid code signing requirements in CI -->
+		<RuntimeIdentifier Condition="'$(TargetFramework)' == 'net10.0-ios' AND '$(RuntimeIdentifier)' == ''">iossimulator-x64</RuntimeIdentifier>
 
 		<!-- Display name -->
 		<ApplicationTitle>Age Signals</ApplicationTitle>
@@ -83,12 +86,6 @@
 	<!-- iOS Entitlements -->
 	<PropertyGroup Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'ios'">
 		<CodesignEntitlements>Platforms\iOS\Entitlements.plist</CodesignEntitlements>
-	</PropertyGroup>
-
-	<!-- iOS Simulator Code Signing (ad-hoc for simulator) -->
-	<PropertyGroup Condition="$(TargetFramework)=='net10.0-ios' AND $(RuntimeIdentifier.Contains('simulator'))">
-		<CodesignKey>-</CodesignKey>
-		<CodesignProvision></CodesignProvision>
 	</PropertyGroup>
 
 </Project>
