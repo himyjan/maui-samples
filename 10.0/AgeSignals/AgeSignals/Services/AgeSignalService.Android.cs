@@ -16,7 +16,7 @@ public partial class AgeSignalService : IAgeSignalService
     
     // Set to true to use FakeAgeSignalsManager since Google has paused the live API
     // Change to false when Google launches the API live (expected May/July 2026)
-    private const bool USE_FAKE_FOR_TESTING = true;
+    private static readonly bool UseFakeForTesting = true;
 
     public AgeSignalService(ILogger<AgeSignalService> logger)
     {
@@ -47,7 +47,7 @@ public partial class AgeSignalService : IAgeSignalService
 
             if (_ageSignalsManager == null)
             {
-                if (USE_FAKE_FOR_TESTING)
+                if (UseFakeForTesting)
                 {
                     // Use FakeAgeSignalsManager since Google has paused live responses
                     _ageSignalsManager = CreateFakeAgeSignalsManager();
