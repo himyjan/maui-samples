@@ -83,8 +83,6 @@
 	<!-- iOS Entitlements -->
 	<PropertyGroup Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'ios'">
 		<CodesignEntitlements>Platforms\iOS\Entitlements.plist</CodesignEntitlements>
-		<!-- Force simulator build when no RuntimeIdentifier is specified (for CI builds) -->
-		<RuntimeIdentifier Condition="'$(RuntimeIdentifier)' == ''">iossimulator-x64</RuntimeIdentifier>
 	</PropertyGroup>
 
 </Project>
