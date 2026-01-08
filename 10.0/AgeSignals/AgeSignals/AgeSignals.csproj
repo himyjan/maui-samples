@@ -83,11 +83,14 @@
 	<!-- iOS Build Configuration -->
 	<PropertyGroup Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'ios'">
 		<CodesignEntitlements>Platforms\iOS\Entitlements.plist</CodesignEntitlements>
-		<!-- Disable code signing for CI/CD builds -->
-		<CodesignKey></CodesignKey>
-		<CodesignProvision></CodesignProvision>
+	</PropertyGroup>
+
+	<!-- iOS CI Build Configuration - Only applies in GitHub Actions CI -->
+	<PropertyGroup Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'ios' AND '$(GITHUB_ACTIONS)' == 'true'">
+		<!-- Skip app bundle creation and code signing for CI/CD builds only -->
+		<CreateAppBundle>false</CreateAppBundle>
+		<BuildIpa>false</BuildIpa>
 		<RuntimeIdentifier>iossimulator-arm64</RuntimeIdentifier>
-		<_CodeSigningRequired>false</_CodeSigningRequired>
 	</PropertyGroup>
 
 </Project>
