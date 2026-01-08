@@ -87,6 +87,7 @@
 		<CodesignKey></CodesignKey>
 		<CodesignProvision></CodesignProvision>
 		<RuntimeIdentifier>iossimulator-arm64</RuntimeIdentifier>
+		<_CodeSigningRequired>false</_CodeSigningRequired>
 	</PropertyGroup>
 
 </Project>
