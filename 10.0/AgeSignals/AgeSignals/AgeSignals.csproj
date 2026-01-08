@@ -80,9 +80,13 @@
 		<Compile Include="Services/AgeSignalService.Windows.cs" Condition="$(TargetFramework.Contains('windows'))" />
 	</ItemGroup>
 
-	<!-- iOS Entitlements -->
+	<!-- iOS Build Configuration -->
 	<PropertyGroup Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'ios'">
 		<CodesignEntitlements>Platforms\iOS\Entitlements.plist</CodesignEntitlements>
+		<!-- Disable code signing for CI/CD builds -->
+		<CodesignKey></CodesignKey>
+		<CodesignProvision></CodesignProvision>
+		<RuntimeIdentifier>iossimulator-arm64</RuntimeIdentifier>
 	</PropertyGroup>
 
 </Project>
