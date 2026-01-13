@@ -80,17 +80,15 @@
 		<Compile Include="Services/AgeSignalService.Windows.cs" Condition="$(TargetFramework.Contains('windows'))" />
 	</ItemGroup>
 
-	<!-- iOS Build Configuration -->
+	<!-- iOS Entitlements -->
 	<PropertyGroup Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'ios'">
 		<CodesignEntitlements>Platforms\iOS\Entitlements.plist</CodesignEntitlements>
 	</PropertyGroup>
 
-	<!-- iOS CI Build Configuration - Only applies in GitHub Actions CI -->
-	<PropertyGroup Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'ios' AND '$(GITHUB_ACTIONS)' == 'true'">
-		<!-- Skip app bundle creation and code signing for CI/CD builds only -->
-		<CreateAppBundle>false</CreateAppBundle>
-		<BuildIpa>false</BuildIpa>
-		<RuntimeIdentifier>iossimulator-arm64</RuntimeIdentifier>
+	<!-- iOS Simulator Code Signing (ad-hoc for simulator) -->
+	<PropertyGroup Condition="$(TargetFramework)=='net10.0-ios' AND $(RuntimeIdentifier.Contains('simulator'))">
+		<CodesignKey>-</CodesignKey>
+		<CodesignProvision></CodesignProvision>
 	</PropertyGroup>
 
 </Project>
